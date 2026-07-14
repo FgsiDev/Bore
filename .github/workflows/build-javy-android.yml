@@ -1,8 +1,13 @@
 name: Build Javy for Termux (arm64 Android)
 
 on:
-  workflow_dispatch: {}
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
+  workflow_dispatch: {}
+  
 jobs:
   build-android-arm64:
     runs-on: ubuntu-latest
