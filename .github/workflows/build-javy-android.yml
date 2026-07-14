@@ -21,7 +21,7 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: aarch64-linux-android
+          targets: aarch64-linux-android,wasm32-wasip1
 
       - name: Install Android NDK
         uses: nttld/setup-ndk@v1
@@ -38,6 +38,9 @@ jobs:
           echo "CXX_aarch64_linux_android=$TOOLCHAIN/aarch64-linux-android24-clang++" >> $GITHUB_ENV
           echo "AR_aarch64_linux_android=$TOOLCHAIN/llvm-ar" >> $GITHUB_ENV
           echo "CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER=$TOOLCHAIN/aarch64-linux-android24-clang" >> $GITHUB_ENV
+
+      - name: Build the default QuickJS plugin
+        run: make build-default-plugin
 
       - name: Build Javy CLI for aarch64-linux-android
         run: cargo build --release --target aarch64-linux-android -p javy-cli
